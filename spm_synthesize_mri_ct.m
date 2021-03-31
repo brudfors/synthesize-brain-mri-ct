@@ -1,12 +1,12 @@
 function spm_synthesize_mri_ct(files, modalities, odir)
 % Image synthesize (translation) of CTs and MRIs. Input images (.nii) need 
 % to be of the same dimensions. Output synthesized scans are prefixed as:
-%     - i1_*: CT
-%     - i2_*: T1w
-%     - i3_*: T2w
-%     - i4_*: PDw
+%     - mi1_*: CT
+%     - mi2_*: T1w
+%     - mi3_*: T2w
+%     - mi4_*: PDw
 % Note, only the missing modalities are synthesized, others remain the same
-% as input.
+% as input (but intensity non-uniformity corrected).
 %
 % PARAMETERS
 % ----------
@@ -103,7 +103,7 @@ end
 % output settings
 out        = struct;
 out.result = {fullfile(run.odir{1},['mb_fit_' run.onam '.mat'])};
-out.i      = true;
+out.i      = false;
 out.mi     = true;
 out.wi     = false;
 out.wmi    = false;
@@ -116,7 +116,7 @@ spm_jobman('run', jobs);
 
 % subtract 1,000 from output CT image
 [pth,nam,ext]  = fileparts(images{1});
-pth_ct         = fullfile(pth, ['i1_1_00001_' nam '_' run.onam ext]);
+pth_ct         = fullfile(pth, ['mi1_1_00001_' nam '_' run.onam ext]);
 Nii            = nifti(pth_ct);
 dat            = Nii.dat();
 dat            = dat - 1000;

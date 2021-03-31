@@ -35,8 +35,8 @@ if nargin < 3, odir = '.'; end
 addpath(fullfile(spm('dir'),'toolbox','mb')); 
 
 % parameters
-pth_mu  = '/home/mbrud/Projects/mb-tools/mb-merge/mu_merged.nii';
-pth_int = '/home/mbrud/Projects/mb-tools/mb-merge/prior_merged_2.mat';
+pth_mu  = 'mu.nii';
+pth_int = 'prior.mat';
 modalities_learned = {'ct', 't1', 't2', 'pd'};  % order of modalities in learned intensity prior
 
 % sanity check

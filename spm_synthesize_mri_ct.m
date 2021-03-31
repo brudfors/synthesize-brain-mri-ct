@@ -35,8 +35,9 @@ if nargin < 3, odir = '.'; end
 addpath(fullfile(spm('dir'),'toolbox','mb')); 
 
 % parameters
-pth_mu  = '/home/mbrud/Projects/mb-tools/mb-merge/mu_merged.nii';
-pth_int = '/home/mbrud/Projects/mb-tools/mb-merge/prior_merged_2.mat';
+dir_code = fileparts(mfilename('fullpath'));
+pth_mu   = fullfile(dir_code,'mu.nii');
+pth_int  = fullfile(dir_code,'prior.mat');
 modalities_learned = {'ct', 't1', 't2', 'pd'};  % order of modalities in learned intensity prior
 
 % sanity check
@@ -55,6 +56,26 @@ for i=1:numel(modalities)
 end
 if numel(unique(files)) ~= numel(files)
     error('There are duplicates in input types!')
+end
+
+% Get model files
+if ~(exist(pth_mu, 'file') == 2)
+    % Path to model zip file
+    pth_model_zip = fullfile(dir_code, 'model.zip');    
+    % Model file not present
+    if ~(exist(pth_model_zip, 'file') == 2)
+        % Download model file
+        url_model = 'https://www.dropbox.com/s/jpxxuv90ouv19c6/model.zip?dl=1';
+        fprintf('Downloading model files (first use only)... ')
+        websave(pth_model_zip, url_model);                
+        fprintf('done.\n')
+    end    
+    % Unzip model file, if has not been done
+    fprintf('Extracting model files  (first use only)... ')
+    unzip(pth_model_zip, dir_code);
+    fprintf('done.\n')    
+    % Delete model.zip
+    spm_unlink(pth_model_zip);
 end
 
 % output directory

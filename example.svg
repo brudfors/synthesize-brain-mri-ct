@@ -14,7 +14,10 @@
    version="1.1"
    id="svg8"
    inkscape:version="1.0.2 (394de47547, 2021-03-26)"
-   sodipodi:docname="example.svg">
+   sodipodi:docname="example.svg"
+   inkscape:export-filename="/home/mbrud/Code/matlab/synthesize-mri-ct/example.png"
+   inkscape:export-xdpi="150"
+   inkscape:export-ydpi="150">
   <defs
      id="defs2">
     <clipPath

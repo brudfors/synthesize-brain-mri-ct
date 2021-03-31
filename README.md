@@ -13,7 +13,6 @@ The algorithm requires that the following packages are on the MATLAB path:
 * **Longitudinal toolbox:** Add Longitudinal folder from the toolbox directory of the SPM source code.
 * **Multi-Brain toolbox:** Download (or clone) from https://github.com/WTCN-computational-anatomy-group/diffeo-segment and add to the toolbox folder of SPM, renamed `mb`.
 
-
 ## Example use case
 
 This example code synthesize T1w, T2w and CT scans from an input PDw MRI. The ouputs are written in the `odir` folder, prefixed `mi*`.
@@ -24,6 +23,19 @@ modalities = {'pd'};        % inform algorithm that the image is a PDw
 odir       = 'synthesized'; % folder where to write output
 
 spm_synthesize_mri_ct(files, modalities, odir);
+```
+
+## Reference
+
+``` latex
+@inproceedings{brudfors2019empirical,
+  title={Empirical bayesian mixture models for medical image translation},
+  author={Brudfors, Mikael and Ashburner, John and Nachev, Parashkev and Balbastre, Ya{\"e}l},
+  booktitle={International Workshop on Simulation and Synthesis in Medical Imaging},
+  pages={1--12},
+  year={2019},
+  organization={Springer}
+}
 ```
 
 ## License

@@ -16,7 +16,7 @@ The algorithm requires that the following packages are on the MATLAB path:
 
 ## Example use case
 
-This example code synthesizes T1w, T2w and CT scans from an input PDw MRI. The ouputs are written in the `odir` folder, prefixed `mi*`.
+This example code synthesize T1w, T2w and CT scans from an input PDw MRI. The ouputs are written in the `odir` folder, prefixed `mi*`.
 
 ``` matlab
 files      = {'PDw.nii'};   % path to PDw MR image

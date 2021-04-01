@@ -11,7 +11,7 @@ The algorithm requires that the following packages are on the MATLAB path:
 * **SPM12:** Download from https://www.fil.ion.ucl.ac.uk/spm/software/spm12/.
 * **Shoot toolbox:** Add Shoot folder from the toolbox directory of the SPM source code.
 * **Longitudinal toolbox:** Add Longitudinal folder from the toolbox directory of the SPM source code.
-* **Multi-Brain toolbox:** Download (or clone) from https://github.com/WTCN-computational-anatomy-group/diffeo-segment and add to the toolbox folder of SPM, renamed `mb`.
+* **Multi-Brain toolbox:** Download (or clone) from https://github.com/WTCN-computational-anatomy-group/diffeo-segment, to the toolbox folder of SPM, renamed `mb`.
 
 ## Example use case
 

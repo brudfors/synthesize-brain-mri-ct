@@ -112,7 +112,7 @@ run.mu.exist    = {pth_mu};
 run.onam        = 'synthesise_mri_ct';
 run.odir        = {odir};        
 run.gmm.pr.file = {pth_int};
-run.v_settings  = [0.00001 0 0.4 0.1 0.4]*4;
+run.v_settings  = [0.00001 0 0.4 0.1 0.4]*4;  % let's increase the default diffeo regularisation a bit
 % input images
 modality = [2, 1, 1, 1];
 inu_reg  = [1e6, 1e3, 1e3, 1e3];
@@ -135,7 +135,7 @@ jobs{1}.spm.tools.mb.run = run;
 jobs{2}.spm.tools.mb.out = out;
 spm_jobman('run', jobs);
 
-% subtract 1,000 from output CT image
+% subtract 1,000 from output CT image (because 1,000 is added during the fitting process)
 [pth,nam,ext]  = fileparts(images{1});
 pth_ct         = fullfile(pth, ['mi1_1_00001_' nam '_' run.onam ext]);
 Nii            = nifti(pth_ct);
@@ -152,6 +152,4 @@ for i=1:numel(dummies)
         spm_unlink(dummies{i});
     end
 end
-
-return
 %==========================================================================

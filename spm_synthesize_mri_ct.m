@@ -112,7 +112,6 @@ run.mu.exist    = {pth_mu};
 run.onam        = 'synthesise_mri_ct';
 run.odir        = {odir};        
 run.gmm.pr.file = {pth_int};
-run.v_settings  = [0.00001 0 0.4 0.1 0.4]*4;  % let's increase the default diffeo regularisation a bit
 % input images
 modality = [2, 1, 1, 1];
 inu_reg  = [1e6, 1e3, 1e3, 1e3];

@@ -79,7 +79,7 @@ if ~(exist(pth_mu, 'file') == 2)
 end
 
 % output directory
-[odir0,nam,ext] = fileparts(files{1});
+[odir0,nam0,ext0] = fileparts(files{1});
 if nargin < 3, odir = odir0; end
 if ~(exist(odir,'dir') == 7), mkdir(odir); end    
 
@@ -98,8 +98,8 @@ end
 dummies = cell(1,numel(modalities_learned));
 for i=1:numel(images)
     if isempty(images{i})
-        dummies{i}     = fullfile(odir,['dummy' num2str(i) '_' nam ext]);
-        copyfile(fullfile(odir0, [nam ext]), dummies{i});
+        dummies{i}     = fullfile(odir,['dummy' num2str(i) '_' nam0 ext0]);
+        copyfile(fullfile(odir0, [nam0 ext0]), dummies{i});
         Nii            = nifti(dummies{i});
         Nii.dat(:,:,:) = 0;
         images{i}      = dummies{i};
@@ -113,12 +113,19 @@ run.onam        = 'synthesise_mri_ct';
 run.odir        = {odir};        
 run.gmm.pr.file = {pth_int};
 % input images
-modality = [2, 1, 1, 1];
-inu_reg  = [1e6, 1e3, 1e3, 1e3];
+mod_mri     = 1;
+mod_ct      = 2;
+inu_reg_mri = 1e3;
+inu_reg_ct  = 1e6;
 for i=1:numel(images)
-    run.gmm(1).chan(i).images      = {images{i}};
-    run.gmm(1).chan(i).modality    = modality(i);
-    run.gmm(1).chan(i).inu.inu_reg = inu_reg(i);
+    run.gmm(1).chan(i).images = {images{i}};
+    if strcmpi(modalities_learned{i}, 'ct')
+        run.gmm(1).chan(i).modality    = mod_ct;
+        run.gmm(1).chan(i).inu.inu_reg = inu_reg_ct;
+    else
+        run.gmm(1).chan(i).modality    = mod_mri;
+        run.gmm(1).chan(i).inu.inu_reg = inu_reg_mri;
+    end        
 end
 % output settings
 out        = struct;
@@ -135,16 +142,20 @@ jobs{2}.spm.tools.mb.out = out;
 spm_jobman('run', jobs);
 
 % subtract 1,000 from output CT image (because 1,000 is added during the fitting process)
-[pth,nam,ext]  = fileparts(images{1});
-pth_ct         = fullfile(pth, ['mi1_1_00001_' nam '_' run.onam ext]);
-Nii            = nifti(pth_ct);
-dat            = Nii.dat();
-dat            = dat - 1000;
-Nii.dat(:,:,:) = dat;
+for i=1:numel(images)
+    if strcmpi(modalities_learned{i}, 'ct')
+        pth_ct         = fullfile(odir,['mi' num2str(i) '_1_00001_dummy1_' nam0  '_' run.onam ext0]);
+        Nii            = nifti(pth_ct);
+        dat            = Nii.dat();
+        dat            = dat - 1000;
+        Nii.dat(:,:,:) = dat;
+    end
+end
 
 % clean-up
-spm_unlink(fullfile(pth, ['v_1_00001_' nam '_' run.onam ext]));
-spm_unlink(fullfile(pth, ['y_1_00001_' nam '_' run.onam ext]));
+[~,nam,ext] = fileparts(images{1});
+spm_unlink(fullfile(odir, ['v_1_00001_' nam '_' run.onam ext]));
+spm_unlink(fullfile(odir, ['y_1_00001_' nam '_' run.onam ext]));
 spm_unlink(out.result{1});
 for i=1:numel(dummies)    
     if ~isempty(dummies{i})

@@ -31,16 +31,35 @@ function spm_synthesize_mri_ct(files, modalities, odir)
 %_______________________________________________________________________
 if nargin < 3, odir = '.'; end
 
+% check MATLAB path
+%--------------------------------------------------------------------------
+if isempty(fileparts(which('spm')))
+    error('SPM12 not on the MATLAB path! Download from https://www.fil.ion.ucl.ac.uk/spm/software/download/'); 
+end
+if isempty(fileparts(which('spm_shoot3d')))
+    error('Shoot toolbox not on the MATLAB path! Add from spm12/toolbox/Shoot'); 
+end
+if isempty(fileparts(which('spm_dexpm')))
+    error('Longitudinal toolbox not on the MATLAB path! Add from spm12/toolbox/Longitudinal'); 
+end
 % add MB toolbox
 addpath(fullfile(spm('dir'),'toolbox','mb')); 
+if isempty(fileparts(which('spm_mb_fit')))
+    error('Multi-Brain toolbox not on the MATLAB path! Download/clone from https://github.com/WTCN-computational-anatomy-group/mb and place in the SPM12 toolbox folder.');
+end
+if ~(exist('spm_gmmlib','file') == 3)
+    error('Multi-Brain GMM library is not compiled, please follow the Install instructions on the Multi-Brain GitHub README.')
+end
 
 % parameters
+%--------------------------------------------------------------------------
 dir_code = fileparts(mfilename('fullpath'));
 pth_mu   = fullfile(dir_code,'mu.nii');
 pth_int  = fullfile(dir_code,'prior.mat');
 modalities_learned = {'ct', 't1', 't2', 'pd'};  % order of modalities in learned intensity prior
 
 % sanity check
+%--------------------------------------------------------------------------
 if ischar(files), files = {files}; end
 if ischar(modalities), modalities = {modalities}; end    
 if ~iscell(files) || ~iscell(modalities)

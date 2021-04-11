@@ -3,15 +3,15 @@ This is code for model-based image synthesize (translation) of brain CTs and MRI
 
 <img style="float: right;" src="https://github.com/brudfors/synthesize-brain-mri-ct/blob/main/example.png" width="60%" height="60%">
 
-The implementation is done in Matlab and depends on the SPM12 package (and its MB toolbox). The code should work on raw images; that is, with minimal preprocessing applied beforehand. It furthermore requires no training, as it is fully unsupervised.
+The implementation is done in MATLAB and depends on the SPM12 package (and its MB toolbox). The code should work on raw images; that is, with minimal preprocessing applied beforehand. It furthermore requires no training, as it is fully unsupervised.
 
 ## Dependencies
 
-The algorithm requires that the following packages are on the MATLAB path:
-* **SPM12:** Download from https://www.fil.ion.ucl.ac.uk/spm/software/spm12/.
-* **Shoot toolbox:** Add Shoot folder from the toolbox directory of the SPM source code.
-* **Longitudinal toolbox:** Add Longitudinal folder from the toolbox directory of the SPM source code.
-* **Multi-Brain toolbox:** Download (or clone) from https://github.com/WTCN-computational-anatomy-group/diffeo-segment, to the toolbox folder of SPM, renamed `mb`.
+The algorithm is developed using MATLAB and relies on external functionality from the SPM12 software. The following are therefore required downloads and need to be placed on the MATLAB search path (using `addpath`):
+* **SPM12:** Download from https://www.fil.ion.ucl.ac.uk/spm/software/download/.
+* **Shoot toolbox:** The Shoot folder from the toolbox directory of SPM12.
+* **Longitudinal toolbox:** The Longitudinal folder from the toolbox directory of SPM12.
+* **Multi-Brain toolbox:** Download/clone https://github.com/WTCN-computational-anatomy-group/mb to the SPM12 `toolbox` folder. Next, in a terminal, `cd` to this folder and execute the `make` command.
 
 ## Example use case
 

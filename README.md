@@ -13,16 +13,25 @@ The algorithm is developed using MATLAB and relies on external functionality fro
 * **Longitudinal toolbox:** The Longitudinal folder from the toolbox directory of SPM12.
 * **Multi-Brain toolbox:** Download/clone https://github.com/WTCN-computational-anatomy-group/mb to the SPM12 `toolbox` folder. Next, in a terminal, `cd` to this folder and execute the `make` command.
 
-## Example use case
+## Example use cases
 
 This example code synthesize T1w, T2w and CT scans from an input PDw MRI. The ouputs are written in the `odir` folder, prefixed `mi*`. Note that only the missing modalities are synthesized, others remain the same as their input (but intensity non-uniformity corrected).
 
 ``` matlab
-files      = {'PDw.nii'};   % path to PDw MR image
-modalities = {'pd'};        % inform algorithm that the image is a PDw
+files      = 'PDw.nii';     % path to PDw MR image
+modalities = 'pd';          % inform algorithm that the image is a PDw
 odir       = 'synthesized'; % folder where to write output
 
 spm_synthesize_mri_ct(files, modalities, odir);
+```
+
+This example code synthesize PDw and CT scans from input T1w and T2w MRIs. The ouputs are written in the same folder as the input images, prefixed `mi*`.
+
+``` matlab
+files      = {'T1w.nii', 'T2w.nii'};   % path to PDw MR image
+modalities = {'t1', 't2'};             % inform algorithm that the image is a PDw
+
+spm_synthesize_mri_ct(files, modalities);
 ```
 
 ## Reference

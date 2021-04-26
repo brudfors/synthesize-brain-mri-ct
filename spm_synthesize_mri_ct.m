@@ -29,7 +29,7 @@ function spm_synthesize_mri_ct(files, modalities, odir)
 % (pp. 1-12). Springer, Cham.
 %
 %_______________________________________________________________________
-if nargin < 3, odir = '.'; end
+if nargin < 3, odir = ''; end
 
 % check MATLAB path
 %--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ end
 
 % output directory
 [odir0,nam0,ext0] = fileparts(files{1});
-if nargin < 3, odir = odir0; end
+if isempty(odir), odir = odir0; end
 if ~(exist(odir,'dir') == 7), mkdir(odir); end    
 
 % order input files to match intensity prior

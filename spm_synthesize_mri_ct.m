@@ -165,7 +165,11 @@ spm_jobman('run', jobs);
 % subtract 1,000 from output CT image (because 1,000 is added during the fitting process)
 for i=1:numel(images)
     if strcmpi(modalities_learned{i}, 'ct')
-        pth_ct         = fullfile(odir,['mi' num2str(i) '_1_00001_dummy1_' nam0  '_' run.onam ext0]);
+        if isempty(dummies{i})
+            pth_ct = fullfile(odir,['mi' num2str(i) '_1_00001_' nam0  '_' run.onam ext0]);
+        else
+            pth_ct = fullfile(odir,['mi' num2str(i) '_1_00001_dummy1_' nam0  '_' run.onam ext0]);
+        end
         Nii            = nifti(pth_ct);
         dat            = Nii.dat();
         dat            = dat - 1000;

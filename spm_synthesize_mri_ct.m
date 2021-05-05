@@ -136,7 +136,7 @@ run.v_settings  = [0.00001 0 0.4 0.1 0.4]*4;
 % input images
 mod_mri     = 1;
 mod_ct      = 2;
-inu_reg_mri = 1e3;
+inu_reg_mri = 1e4;
 inu_reg_ct  = 1e6;
 for i=1:numel(images)
     run.gmm(1).chan(i).images = {images{i}};

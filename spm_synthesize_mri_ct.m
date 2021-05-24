@@ -133,6 +133,7 @@ run.odir        = {odir};
 run.gmm.pr.file        = {pth_int};
 run.gmm.pr.hyperpriors = [];
 run.v_settings  = [0.00001 0 0.4 0.1 0.4]*4;
+run.min_dim     = 8;
 % input images
 mod_mri     = 1;
 mod_ct      = 2;

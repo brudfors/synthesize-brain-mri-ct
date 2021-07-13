@@ -3,7 +3,7 @@ This is code for model-based image synthesize (translation) of brain CTs and MRI
 
 <img style="float: right;" src="https://github.com/brudfors/synthesize-brain-mri-ct/blob/main/example.png" width="60%" height="60%">
 
-The implementation is done in MATLAB and depends on the SPM12 package (and its MB toolbox). The code should work on **raw images**; that is, with minimal preprocessing applied beforehand. It furthermore requires no training, as it is fully **unsupervised**. If you find the code useful, please consider citing the publication in the *Reference* section.
+The implementation is done in MATLAB and depends on the SPM12 package (and its MB toolbox). The code should work on **raw images**; that is, with minimal preprocessing applied beforehand (the input scans just need to be aligned/registered). It furthermore requires no training, as it is fully **unsupervised**. If you find the code useful, please consider citing the publication in the *Reference* section.
 
 ## Dependencies
 

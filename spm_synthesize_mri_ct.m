@@ -120,7 +120,7 @@ for i=1:numel(images)
         dummies{i}     = fullfile(odir,['dummy' num2str(i) '_' nam0 ext0]);
         copyfile(fullfile(odir0, [nam0 ext0]), dummies{i});
         Nii            = nifti(dummies{i});
-        Nii.dat(:,:,:) = 0;
+        Nii.dat(:,:,:) = NaN;
         images{i}      = dummies{i};
     end
 end

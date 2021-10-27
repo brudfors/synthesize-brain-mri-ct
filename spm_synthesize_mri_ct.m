@@ -100,7 +100,7 @@ end
 % output directory
 [odir0,nam0,ext0] = fileparts(files{1});
 if isempty(odir), odir = odir0; end
-if ~(exist(odir,'dir') == 7), mkdir(odir); end    
+if ~isempty(odir) && ~(exist(odir,'dir') == 7), mkdir(odir); end
 
 % order input files to match intensity prior
 images = cell(1,numel(modalities_learned));
